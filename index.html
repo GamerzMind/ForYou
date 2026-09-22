@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Official Appeal to the Court of Arshee Khan</title>
+    <style>
+        body {
+            background-color: #fff0f3;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 50px 20px;
+            color: #590d22;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+        }
+        h1 {
+            color: #a4133c;
+            font-size: 24px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #6c757d;
+        }
+        .highlight {
+            color: #ff4d6d;
+            font-weight: bold;
+        }
+        .buttons {
+            margin-top: 30px;
+            position: relative;
+            height: 60px;
+        }
+        .btn {
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        #yes-btn {
+            background-color: #ff4d6d;
+            color: white;
+            margin-right: 15px;
+        }
+        #yes-btn:hover {
+            background-color: #c9184a;
+        }
+        #no-btn {
+            background-color: #e9ecef;
+            color: #495057;
+            position: absolute;
+        }
+        #success-message {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #2b9348;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>⚖️ Case No. 404: State of Arshee Khan vs. Mohammed Saad</h1>
+        <p><strong>Defendant's Statement:</strong> I, Mohammed Saad, hereby formally admit that I committed a severe violation of universal law by being rude to <span class="highlight">Arshee Khan</span>.</p>
+        <p>I realize my brain experienced a temporary glitch, and I am truly, deeply sorry for disturbing the peace of the cutest human in existence.</p>
+        <p><em>Terms of Parole:</em> I accept full responsibility, promise to do better, and am prepared to offer a mandatory peace-offering snack.</p>
+        
+        <p><strong>How do you plead? Can you find it in your heart to forgive me? 🙏</strong></p>
+
+        <div class="buttons">
+            <button id="yes-btn" class="btn" onclick="acceptApology()">Yes, I forgive you</button>
+            <button id="no-btn" class="btn" onmouseover="moveButton()">No, stay mad</button>
+        </div>
+
+        <div id="success-message">🎉 Yay! Appeal granted! Sentence commuted to zero days of bad vibes. (Time to collect your snack bribe!)</div>
+    </div>
+
+    <script>
+        function moveButton() {
+            const noBtn = document.getElementById('no-btn');
+            const x = Math.random() * (window.innerWidth - 200);
+            const y = Math.random() * (window.innerHeight - 100);
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
+
+        function acceptApology() {
+            document.getElementById('yes-btn').style.display = 'none';
+            document.getElementById('no-btn').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
