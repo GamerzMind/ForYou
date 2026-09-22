@@ -4,68 +4,149 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Official Appeal to the Court of Arshee Khan</title>
+    
+    <!-- Import Elegant Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Segoe+UI:wght@300;400;600&display=swap" rel="stylesheet">
+
     <style>
         body {
             background-color: #fff0f3;
+            background-image: linear-gradient(135deg, #fff0f3 25%, #ffe3e8 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            padding: 50px 20px;
+            padding: 10px 20px;
             color: #590d22;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
+
         .container {
             max-width: 600px;
-            margin: 0 auto;
+            width: 100%;
             background: white;
-            padding: 40px;
+            padding: 30px 40px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.2);
+            border: 1px solid #ffe3e8;
+            position: relative;
         }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 8px; left: 8px; right: 8px; bottom: 8px;
+            border: 2px solid #ffccd5;
+            border-radius: 14px;
+            pointer-events: none;
+        }
+
         h1 {
-            color: #a4133c;
-            font-size: 24px;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(90deg, #c9184a 0%, #ff4d6d 50%, #f7b2bc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 32px;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
         }
+
         p {
-            font-size: 16px;
-            line-height: 1.6;
+            font-size: 15px;
+            line-height: 1.5;
             color: #6c757d;
+            margin-bottom: 12px;
         }
+
+        strong {
+            color: #590d22;
+        }
+
         .highlight {
             color: #ff4d6d;
-            font-weight: bold;
+            font-weight: 600;
+            font-style: italic;
         }
+
+        hr {
+            border: 0;
+            height: 30px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none"><path fill="%23ffccd5" d="M0 5 c 20 -10 40 10 60 0 s 40 10 60 0" fill-opacity="0.5"/></svg>');
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 15px 0;
+        }
+
         .buttons {
-            margin-top: 30px;
+            margin-top: 25px;
             position: relative;
             height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px; /* Generous gap so they never overlap initially */
         }
+
         .btn {
-            padding: 12px 25px;
+            padding: 12px 30px;
             font-size: 16px;
             font-weight: bold;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: 0.3s ease-in-out;
+            font-family: 'Segoe UI', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
+
         #yes-btn {
             background-color: #ff4d6d;
             color: white;
-            margin-right: 15px;
+            box-shadow: 0 4px 12px rgba(255, 77, 109, 0.4);
+            animation: pulse 2s infinite;
+            z-index: 2;
         }
+
         #yes-btn:hover {
             background-color: #c9184a;
+            transform: translateY(-2px);
         }
+
         #no-btn {
             background-color: #e9ecef;
-            color: #495057;
-            position: absolute;
+            color: #6c757d;
+            border: 1px solid #dee2e6;
+            z-index: 2;
         }
+
+        #no-btn:hover {
+            background-color: #adb5bd;
+            color: white;
+        }
+
         #success-message {
             display: none;
             margin-top: 20px;
             font-size: 18px;
             color: #2b9348;
             font-weight: bold;
+            font-family: 'Playfair Display', serif;
+            background-color: #d8f3dc;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px dashed #74c69d;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.4); }
+            70% { box-shadow: 0 0 0 8px rgba(255, 77, 109, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0); }
         }
     </style>
 </head>
@@ -73,15 +154,20 @@
 
     <div class="container">
         <h1>⚖️ Case No. 404: State of Arshee Khan vs. Mohammed Saad</h1>
-        <p><strong>Defendant's Statement:</strong> I, Mohammed Saad, hereby formally admit that I committed a severe violation of universal law by being rude to <span class="highlight">Arshee Khan</span>.</p>
-        <p>I realize my brain experienced a temporary glitch, and I am truly, deeply sorry for disturbing the peace of the cutest human in existence.</p>
-        <p><em>Terms of Parole:</em> I accept full responsibility, promise to do better, and am prepared to offer a mandatory peace-offering snack.</p>
         
-        <p><strong>How do you plead? Can you find it in your heart to forgive me? 🙏</strong></p>
+        <p><strong>Defendant's Statement:</strong> I, Mohammed Saad, formally admit that I committed a severe violation of universal law by being rude to <span class="highlight">Your Honor, Arshee Khan</span>.</p>
+        
+        <hr>
+        
+        <p>I realize my brain experienced a temporary glitch, and I am truly sorry for disturbing the peace of the cutest human in existence. I throw myself upon the mercy of the court, offering a mandatory peace-offering snack of your choice.</p>
+        
+        <hr>
+        
+        <p><strong>How do you plead? Can you grant an appeal? 🙏</strong></p>
 
         <div class="buttons">
             <button id="yes-btn" class="btn" onclick="acceptApology()">Yes, I forgive you</button>
-            <button id="no-btn" class="btn" onmouseover="moveButton()">No, stay mad</button>
+            <button id="no-btn" class="btn" onmouseover="moveButton()" onclick="moveButton()">No, stay mad</button>
         </div>
 
         <div id="success-message">🎉 Yay! Appeal granted! Sentence commuted to zero days of bad vibes. (Time to collect your snack bribe!)</div>
@@ -90,9 +176,10 @@
     <script>
         function moveButton() {
             const noBtn = document.getElementById('no-btn');
-            const x = Math.random() * (window.innerWidth - 200);
-            const y = Math.random() * (window.innerHeight - 100);
+            // Switch to fixed positioning only when it starts dodging
             noBtn.style.position = 'fixed';
+            const x = Math.random() * (window.innerWidth - 180);
+            const y = Math.random() * (window.innerHeight - 80);
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
         }
