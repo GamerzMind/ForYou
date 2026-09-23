@@ -120,12 +120,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 25px;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .btn {
-            padding: 12px 32px;
-            font-size: 14px;
+            padding: 12px 24px;
+            font-size: 13px;
             font-weight: 600;
             border: none;
             border-radius: 6px;
@@ -155,21 +156,26 @@
             z-index: 20;
         }
 
-        #success-message {
+        #proof-btn {
             display: none;
-            margin-top: 25px;
-            font-size: 16px;
-            color: var(--emerald);
-            font-weight: 600;
-            font-family: 'Cinzel', serif;
-            background-color: #ecfdf5;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #a7f3d0;
-            letter-spacing: 0.5px;
+            background-color: #111827;
+            color: #2dd4bf;
+            border: 1px solid #2dd4bf;
+            z-index: 20;
+            animation: fadeIn 0.5s ease;
         }
 
-        /* Pure CSS Confetti Pieces in Custom Colors */
+        #proof-btn:hover {
+            background-color: #1f2937;
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Pure CSS Confetti Pieces */
         .confetti-piece {
             position: fixed;
             width: 10px;
@@ -188,28 +194,26 @@
 </head>
 <body>
 
-    <div class="container">
+    <div class="container" id="main-container">
         <div class="seal">⚖️💚</div>
         <h1>Emergency Injunction:<br>The Indisputable Cuteness of Arshee Khan</h1>
         
-        <p><strong>Notice of Violation:</strong> It has come to the attention of this Court that <span class="highlight">Arshee Khan</span> has falsely testified that she is "not cute."</p>
+        <p><strong>Notice of Violation:</strong> It has come to the attention of this Court that <span class="highlight">Arshee Khan</span> has falsely claimed she is "not cute."</p>
         
         <div class="divider"></div>
         
-        <p>Expert witness Mohammed Saad has submitted irrefutable evidence proving beyond a reasonable doubt that she is, in fact, the most gorgeous and adorable human currently on record.</p>
+        <p>Expert witness Mohammed Saad has filed overwhelming evidence proving beyond a shadow of a doubt that she is, in fact, the most adorable person on earth.</p>
         
         <div id="feedback-alert"></div>
 
-        <div class="buttons">
+        <div class="buttons" id="button-area">
             <button id="yes-btn" class="btn" onclick="acceptTruth()">I admit it, I'm cute 💅</button>
-            <button id="no-btn" class="btn" onmouseover="moveButton()" onclick="moveButton()">Objection! 🙅‍♀️</button>
+            <button id="no-btn" class="btn" onmouseover="handleNoButton()" onclick="handleNoButton()">Objection! 🙅‍♀️</button>
+            <button id="proof-btn" class="btn" onclick="openSideMirrorPage()">Fine, show me proof</button>
         </div>
-
-        <div id="success-message">Order Restored! 💚💖 The facts are officially recognized, and your supreme cuteness is now a matter of permanent legal record.</div>
     </div>
 
     <script>
-        // Web Audio API Sound Synthesizer
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
         function playSound(type) {
@@ -220,7 +224,6 @@
             const gain = audioCtx.createGain();
             osc.connect(gain);
             gain.connect(audioCtx.destination);
-
             const now = audioCtx.currentTime;
 
             if (type === 'dodge') {
@@ -231,6 +234,19 @@
                 gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
                 osc.start(now);
                 osc.stop(now + 0.1);
+            } else if (type === 'mirror') {
+                [329.63, 440, 554.37, 659.25].forEach((freq, index) => {
+                    const chordOsc = audioCtx.createOscillator();
+                    const chordGain = audioCtx.createGain();
+                    chordOsc.connect(chordGain);
+                    chordGain.connect(audioCtx.destination);
+                    chordOsc.type = 'sine';
+                    chordOsc.frequency.setValueAtTime(freq, now + index * 0.15);
+                    chordGain.gain.setValueAtTime(0.12, now + index * 0.15);
+                    chordGain.gain.exponentialRampToValueAtTime(0.001, now + index * 0.15 + 0.8);
+                    chordOsc.start(now + index * 0.15);
+                    chordOsc.stop(now + index * 0.15 + 0.8);
+                });
             } else if (type === 'victory') {
                 [523.25, 659.25, 783.99, 1046.50].forEach((freq, index) => {
                     const chordOsc = audioCtx.createOscillator();
@@ -247,131 +263,98 @@
             }
         }
 
-        // Exactly 100 custom legal objection phrases
         const objectionPhrases = [
-            "Objection overruled! The court sees right through this.",
-            "Denial noted, but legally incorrect.",
-            "Nice try, but the cuteness evidence is overwhelming.",
-            "The judge rejects this objection!",
-            "Stop running from the truth!",
-            "Contempt of court for denying the obvious!",
-            "Your honor, the defendant requests you stop dodging.",
-            "That objection lacks factual basis.",
-            "Grounds for denial: sheer adorableness.",
-            "The jury has reached a unanimous verdict: you're cute.",
-            "Perjury! We all know the truth.",
-            "Attempting to flee from facts is illegal.",
-            "Motion to dismiss your denial has been granted.",
-            "The supreme court of smiles rejects this appeal.",
-            "You can run from the button, but not the facts.",
-            "That defense holds zero water.",
-            "Objection sustained... wait, no, totally overruled!",
-            "The evidence exhibits A through Z prove otherwise.",
-            "Your cuteness is a matter of public record.",
-            "Error 404: Valid excuse not found.",
-            "Stop stalling and click yes!",
-            "The prosecution rests its case on your undeniable cuteness.",
-            "Striking that statement from the record.",
-            "Sanctions imposed for extreme denial.",
-            "An absolute landmark case of being adorable.",
-            "Counsel, please stop escaping reality.",
-            "The witness is clearly biased against her own charm.",
-            "Judicial notice taken: you are precious.",
-            "That argument has been legally dismantled.",
-            "A blatant violation of universal wholesome laws.",
-            "The gavel has spoken!",
-            "Denying this is a federal offense of vibes.",
-            "Look at the data, the math checks out.",
-            "Scientific fact: cuteness levels are off the charts.",
-            "Even the algorithm knows you're cute.",
-            "Case dismissed... unless you admit it.",
-            "That logic is out of order!",
-            "Recess is over, time to face the facts.",
-            "Subpoena issued for your compliance.",
-            "You're only making your case worse by running!",
-            "The supreme court will not hear this slander.",
-            "Bail denied until you confess your cuteness.",
-            "Affidavit signed: you are adorable.",
-            "Classic deflection tactic, overruled!",
-            "The court is laughing at this defense.",
-            "Unprecedented levels of denial detected.",
-            "Please stop torturing the cursor.",
-            "A definitive ruling has been made.",
-            "Precedent shows you cannot escape this.",
-            "Verified by top experts: 100% cute.",
-            "Your honor, she's doing it again.",
-            "Inadmissible emotional manipulation!",
-            "The prosecution presents exhibit heart.",
-            "Objection dismissed with extreme prejudice.",
-            "That defense is legally laughable.",
-            "Surrender to the cuteness decree.",
-            "The verdict is immutable.",
-            "No amount of running will change reality.",
-            "Testifying falsely against your own vibe?",
-            "A textbook definition of being adorable.",
-            "The judge is banging the gavel hard on this one.",
-            "Request for denial denied.",
-            "You've been caught red-handed being cute.",
-            "Case closed by absolute consensus.",
-            "The defense counsel objects to your objection.",
-            "An open-and-shut case.",
-            "Legal penalty for running: extra snacks.",
-            "The supreme court requires your signature.",
-            "Stop testing the patience of the court.",
-            "You cannot veto universal truth.",
-            "A slam dunk for the prosecution.",
-            "Your cuteness credentials are unassailable.",
-            "Objection thrown out the window.",
-            "The jury is rolling their eyes at this denial.",
-            "Certified cute by official decree.",
-            "You're fighting a losing legal battle.",
-            "The opposition folds under pressure.",
-            "Take the W and click yes!",
-            "A legally binding statement of fact.",
-            "Justice is sweet, just like you.",
-            "The court finds your denial unconvincing.",
-            "Stop evading the inevitable.",
-            "A stellar performance in avoiding compliments.",
-            "The legal system demands your compliance.",
-            "Error: Cuteness overload cannot be denied.",
-            "Verdict stands: utterly adorable.",
-            "Let the record show you hesitated.",
-            "The prosecution calls for a celebration instead.",
-            "Your defense attorney objects to your stubbornness.",
-            "That's going in the permanent legal blooper reel.",
-            "Accept your crown already!",
-            "The high court of feelings rules in your favor.",
-            "Resistance is futile.",
-            "A monumental legal defeat for non-cute claims.",
-            "The absolute pinnacle of charm.",
-            "Dismissed due to overwhelming cuteness.",
-            "Official warning: further running results in hugs.",
-            "The court is adjourned once you surrender.",
-            "Just admit it already! 💅"
+            "Nice try, but the cuteness evidence is bulletproof.",
+            "The judge has looked at the photos—objection overruled!",
+            "Denial noted, but scientifically incorrect.",
+            "Even the jury thinks you're adorable.",
+            "You can't argue with facts, Your Honor!",
+            "The prosecution insists you accept how cute you are.",
+            "Error: Cuteness cannot be legally denied.",
+            "Stop trying to appeal the unappealable!",
+            "The evidence is overwhelmingly in your favor.",
+            "Keep trying, or check out the new 3rd option appearing..."
         ];
 
         let objectionCount = 0;
+        const PROOF_THRESHOLD = 30; // Unlocks the 3rd proof button after 30 attempts
 
-        function moveButton() {
+        function handleNoButton() {
             const noBtn = document.getElementById('no-btn');
+
+            objectionCount++;
+            const randomPhrase = objectionPhrases[(objectionCount - 1) % objectionPhrases.length];
+            document.getElementById('feedback-alert').innerText = `${randomPhrase} (Objections logged: ${objectionCount})`;
+
+            if (objectionCount >= PROOF_THRESHOLD) {
+                document.getElementById('proof-btn').style.display = 'inline-block';
+            }
+
             noBtn.style.position = 'fixed';
             const x = Math.random() * (window.innerWidth - 180);
             const y = Math.random() * (window.innerHeight - 80);
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
 
-            objectionCount++;
-            const randomPhrase = objectionPhrases[(objectionCount - 1) % objectionPhrases.length];
-            document.getElementById('feedback-alert').innerText = `${randomPhrase} (Objections logged: ${objectionCount})`;
-
             playSound('dodge');
         }
 
+        function openSideMirrorPage() {
+            playSound('mirror');
+
+            document.body.style.backgroundColor = "#000000";
+            document.body.style.backgroundImage = "none";
+            
+            document.body.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; width: 100vw; height: 100vh; padding: 60px 80px; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif;">
+                    
+                    <div style="max-width: 420px; text-align: left; color: #ffffff;">
+                        <h2 style="font-family: 'Cinzel', serif; color: #2dd4bf; font-size: 22px; margin-bottom: 15px; letter-spacing: 1px;">Exhibit A: The Irrefutable Proof</h2>
+                        <p style="font-size: 15px; line-height: 1.7; color: #cbd5e1; font-weight: 300; margin-bottom: 25px;">
+                            The court has directed your attention away from the documents.<br><br>
+                            <strong style="color: #fbcfe8;">Please look directly at your screen.</strong><br><br>
+                            The data confirms: case closed. You are looking right at the evidence.
+                        </p>
+                        <button onclick="acceptTruthFromMirror()" style="background-color: #1b4332; color: #ffffff; border: 1px solid #2dd4bf; padding: 12px 28px; font-size: 13px; font-weight: 600; border-radius: 6px; cursor: pointer; letter-spacing: 1px; text-transform: uppercase;">
+                            Okay, I yield, I'm cute 💖
+                        </button>
+                    </div>
+
+                    <div style="flex-grow: 1;"></div>
+                </div>
+            `;
+        }
+
+        function acceptTruthFromMirror() {
+            document.body.innerHTML = `
+                <div style="display: flex; justify-content: center; align-items: center; width: 100vw; height: 100vh; background-color: #000000; font-family: 'Cinzel', serif; color: #2dd4bf; text-align: center;">
+                    <div style="max-width: 500px; padding: 40px;">
+                        <div style="font-size: 40px; margin-bottom: 20px;">💚✨</div>
+                        <h2 style="font-size: 26px; margin-bottom: 15px; letter-spacing: 1px;">Case Closed with Love!</h2>
+                        <p style="font-size: 15px; line-height: 1.6; color: #cbd5e1; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 300;">
+                            The court accepts your official confession. Your supreme cuteness is now a permanent matter of record forever. (Time for a snack celebration!)
+                        </p>
+                    </div>
+                </div>
+            `;
+
+            playSound('victory');
+
+            for (let i = 0; i < 90; i++) {
+                createConfettiPiece();
+            }
+        }
+
         function acceptTruth() {
-            document.getElementById('yes-btn').style.display = 'none';
-            document.getElementById('no-btn').style.display = 'none';
-            document.getElementById('feedback-alert').style.display = 'none';
-            document.getElementById('success-message').style.display = 'block';
+            document.getElementById('main-container').innerHTML = `
+                <div style="font-family: 'Cinzel', serif; color: var(--emerald); font-size: 20px; line-height: 1.6;">
+                    <div style="font-size: 36px; margin-bottom: 15px;">💚✨</div>
+                    Case Closed with Love! 💚💖<br><br>
+                    <span style="font-size: 15px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; color: var(--text-muted);">
+                        The court accepts your confession. Your supreme cuteness is officially recognized forever. (Time for a snack celebration!)
+                    </span>
+                </div>
+            `;
 
             playSound('victory');
 
